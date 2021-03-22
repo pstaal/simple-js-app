@@ -18,5 +18,10 @@ let pokemonList = [
 
 
 for (let i = 0; i < pokemonList.length; i++) {
+  if (pokemonList[i].height >  5) {
+    // hightlight the big pokemons in the list
+    document.write(`${pokemonList[i].name} (height: ${pokemonList[i].height}) Wow! this pokemon is huge!! `);
+  } else {
   document.write(`${pokemonList[i].name} (height: ${pokemonList[i].height}) `);
+  }
 }
