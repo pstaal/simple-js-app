@@ -15,3 +15,8 @@ let pokemonList = [
     types: ['tackle', 'super fang']
   },
 ];
+
+
+for (let i = 0; i < pokemonList.length; i++) {
+  document.write(`${pokemonList[i].name} (height: ${Pokemonlist[i].height})`);
+}
