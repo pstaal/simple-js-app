@@ -41,10 +41,11 @@ let pokemonRepository = (function () {
 })();
 
 pokemonRepository.getAll().forEach((pokemon) => {
-  if (pokemon.height >  5) {
-    // hightlight the big pokemons in the list
-    document.write(`<p>${pokemon.name} (height: ${pokemon.height}) Wow! this pokemon is huge!!</p> `);
-  } else {
-  document.write(`<p>${pokemon.name} (height: ${pokemon.height}) </p>`);
-  }
+  let unOrderedList = document.querySelector('.pokemon-list');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button')
+  button.innerText = pokemon.name;
+  button.classList.add('highlighted');
+  listItem.appendChild(button);
+  unOrderedList.appendChild(listItem);
 });
