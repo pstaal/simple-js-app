@@ -17,11 +17,20 @@ let pokemonRepository = (function () {
     },
   ];
 
+  function showDetails(pokemon){
+    console.log(pokemon);
+  }
+
+  function addPokemonClickEvent (button, pokemon) {
+    button.addEventListener('click', () => showDetails(pokemon));
+  }
+
   function addListItem(pokemon) {
     let unOrderedList = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
     let button = document.createElement('button')
     button.innerText = pokemon.name;
+    addPokemonClickEvent(button, pokemon);
     button.classList.add('highlighted');
     listItem.appendChild(button);
     unOrderedList.appendChild(listItem);
