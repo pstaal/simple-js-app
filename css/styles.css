@@ -30,13 +30,14 @@
 }
 
 .modal {
+  position: relative;
   margin: auto;
   display: inline-block;
   box-sizing: border-box;
   background: deeppink;
   padding: 15px;
   width: 100%;
-  max-width: 700px;
+  max-width: 500px;
   text-align: left;
 }
 
@@ -47,6 +48,7 @@
   background: none;
   color: white;
   text-decoration: none;
+  z-index: 1;
 }
 
 .modal h1 {
@@ -55,4 +57,13 @@
 
 .modal p {
   margin-bottom: 0;
+}
+
+.modal img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
