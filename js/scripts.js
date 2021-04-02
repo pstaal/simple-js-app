@@ -4,8 +4,32 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon){
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
-    });
+      let modalContainer = document.querySelector('#modal-container');
+
+      // Clear all existing modal content
+      modalContainer.innerHTML = '';
+
+      let modal = document.createElement('div');
+      modal.classList.add('modal');
+
+      // Add the new modal content
+      let closeButtonElement = document.createElement('button');
+      closeButtonElement.classList.add('modal-close');
+      closeButtonElement.innerText = 'X';
+
+      let titleElement = document.createElement('h1');
+      titleElement.innerText = pokemon.name;
+
+      let contentElement = document.createElement('p');
+      contentElement.innerText = pokemon.name;
+
+      modal.appendChild(closeButtonElement);
+      modal.appendChild(titleElement);
+      modal.appendChild(contentElement);
+      modalContainer.appendChild(modal);
+
+      modalContainer.classList.add('is-visible');
+        });
   }
 
   function addPokemonClickEvent (button, pokemon) {
