@@ -1,21 +1,6 @@
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: 'Bulbasaur',
-      height: 7,
-      types: ['grass', 'poison']
-    },
-    {
-      name: 'Caterpie',
-      height: 3,
-      types: ['grass', 'ground']
-    },
-    {
-      name: 'Rattata',
-      height: 5,
-      types: ['tackle', 'super fang']
-    },
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function showDetails(pokemon){
     console.log(pokemon);
@@ -41,7 +26,7 @@ let pokemonRepository = (function () {
   }
 
   function add(pokemon) {
-    if (typeof pokemon === 'object' && Object.keys(pokemon) === ['name', 'height', 'types']) {
+    if (typeof pokemon === 'object') {
       pokemonList.push(pokemon);
     } else {
       throw new Error('You can only add objects with keys "name, height and types" to the list')
@@ -52,14 +37,34 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
   return {
     add: add,
     getAll: getAll,
     filterPokemon: filterPokemon,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList
   };
 })();
 
-pokemonRepository.getAll().forEach((pokemon) => {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
