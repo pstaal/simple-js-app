@@ -12,6 +12,20 @@ let pokemonRepository = (function () {
     button.addEventListener('click', () => showDetails(pokemon));
   }
 
+  function showLoadingMessage() {
+    let unOrderedList = document.querySelector('.pokemon-list');
+    let loadMessageElement = document.createElement('div');
+    loadMessageElement.innerText= "Waiting for data to load!"
+    unOrderedList.appendChild(loadMessageElement);
+  }
+
+  function hideLoadingMessage() {
+    let elementToRemove = document.querySelector('.pokemon-list > div');
+    if (elementToRemove) {
+      elementToRemove.remove();
+    }
+  }
+
   function addListItem(pokemon) {
     let unOrderedList = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
@@ -40,6 +54,7 @@ let pokemonRepository = (function () {
   }
 
   function loadList() {
+    showLoadingMessage();
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -49,13 +64,16 @@ let pokemonRepository = (function () {
           detailsUrl: item.url
         };
         add(pokemon);
+        hideLoadingMessage();
       });
     }).catch(function (e) {
       console.error(e);
+      hideLoadingMessage();
     })
   }
 
   function loadDetails(item) {
+    showLoadingMessage();
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
@@ -64,8 +82,10 @@ let pokemonRepository = (function () {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = details.types;
+      hideLoadingMessage();
     }).catch(function (e) {
       console.error(e);
+      hideLoadingMessage();
     });
   }
 
