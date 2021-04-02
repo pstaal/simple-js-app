@@ -28,7 +28,7 @@ let pokemonRepository = (function () {
   }
 
   function add(pokemon) {
-    if (typeof pokemon === 'object') {
+    if (typeof pokemon === 'object' && "name" in pokemon && "detailsUrl" in pokemon) {
       pokemonList.push(pokemon);
     } else {
       throw new Error('You can only add objects with keys "name, height and types" to the list')
