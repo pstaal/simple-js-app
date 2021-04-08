@@ -63,12 +63,17 @@ let pokemonRepository = (function () {
 
   function addListItem(pokemon) {
     let pokemonDiv = document.querySelector('.pokemon-list');
+    let newDiv = document.createElement('div');
+    newDiv.classList.add('w-25');
+    newDiv.classList.add('mb-1');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     addPokemonClickEvent(button, pokemon);
     button.classList.add('group-list-item');
+    button.classList.add('text-center');
     button.classList.add('list-group-item-action');
-    pokemonDiv.appendChild(button);
+    newDiv.appendChild(button);
+    pokemonDiv.appendChild(newDiv);
   }
 
   function filterPokemon(name) {
