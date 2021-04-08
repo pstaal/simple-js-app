@@ -68,7 +68,7 @@ let pokemonRepository = (function () {
     let button = document.createElement('button')
     button.innerText = pokemon.name;
     addPokemonClickEvent(button, pokemon);
-    button.classList.add('highlighted');
+    button.classList.add('btn btn-info');
     listItem.appendChild(button);
     unOrderedList.appendChild(listItem);
   }
