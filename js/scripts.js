@@ -62,15 +62,13 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
-    let unOrderedList = document.querySelector('.pokemon-list');
-    let listItem = document.createElement('li');
-    listItem.classList.add("group-list-item");
-    let button = document.createElement('button')
+    let pokemonDiv = document.querySelector('.pokemon-list');
+    let button = document.createElement('button');
     button.innerText = pokemon.name;
     addPokemonClickEvent(button, pokemon);
-    button.classList.add('btn btn-info');
-    listItem.appendChild(button);
-    unOrderedList.appendChild(listItem);
+    button.classList.add('group-list-item');
+    button.classList.add('list-group-item-action');
+    pokemonDiv.appendChild(button);
   }
 
   function filterPokemon(name) {
