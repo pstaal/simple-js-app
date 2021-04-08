@@ -45,8 +45,9 @@ let pokemonRepository = (function () {
       modalBody.appendChild(pokemonImg);
       modalBody.appendChild(heightElement);
 
-      modalContainer.appendChild(modalHeader);
-      modalContainer.appendChild(modalBody);
+      modal.appendChild(modalHeader);
+      modal.appendChild(modalBody);
+      modalContainer.appendChild(modal);
       
         });
   }
