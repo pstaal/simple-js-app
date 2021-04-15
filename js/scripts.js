@@ -48,6 +48,8 @@ let pokemonRepository = (function () {
       modal.appendChild(modalHeader);
       modal.appendChild(modalBody);
       modalContainer.appendChild(modal);
+
+      modalContainer.addClass('is-visible');
       
         });
   }
