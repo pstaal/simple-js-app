@@ -3,7 +3,9 @@ let pokemonRepository = (function () {
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
   let modalContainer = document.querySelector(".modal-dialog");
 
-  function showDetails(pokemon) {
+  function showDetails(pokemon, e) {
+    console.log(pokemon);
+    var pokemonItem = e.target.parentNode;
     loadDetails(pokemon).then(function () {
       // Clear all existing modal content
       modalContainer.innerHTML = "";
@@ -45,12 +47,14 @@ let pokemonRepository = (function () {
 
       modal.appendChild(modalHeader);
       modal.appendChild(modalBody);
-      modalContainer.appendChild(modal);
+      pokemonItem.appendChild(modal);
+      console.log(modal);
     });
   }
 
   function addPokemonClickEvent(button, pokemon) {
-    button.addEventListener("click", () => showDetails(pokemon));
+    console.log({ button, pokemon });
+    button.addEventListener("click", (e) => showDetails(pokemon, e));
   }
 
   function addListItem(pokemon) {
@@ -68,6 +72,7 @@ let pokemonRepository = (function () {
     button.setAttribute("data-target", "mymodal");
     newDiv.appendChild(button);
     pokemonDiv.appendChild(newDiv);
+    console.log(button);
   }
 
   function filterPokemon(name) {
