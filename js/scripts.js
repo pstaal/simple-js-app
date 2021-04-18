@@ -45,7 +45,6 @@ let pokemonRepository = (function () {
 
       modalBody.appendChild(pokemonImg);
       modalBody.appendChild(heightElement);
-      modalBody.appendChild(typesElement);
 
       modal.appendChild(modalHeader);
       modal.appendChild(modalBody);
