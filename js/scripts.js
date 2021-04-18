@@ -55,7 +55,6 @@ let pokemonRepository = (function () {
   }
 
    function addPokemonClickEvent(button, pokemon) {
-    console.log({button, pokemon})
     button.addEventListener("click", () => showDetails(pokemon));
   }
 
@@ -66,7 +65,6 @@ let pokemonRepository = (function () {
     newDiv.classList.add("mb-1");
     let button = document.createElement("button");
     button.innerText = pokemon.name;
-    addPokemonClickEvent(button, pokemon);
     button.classList.add("group-list-item");
     button.classList.add("text-center");
     button.classList.add("list-group-item-action");
@@ -74,7 +72,7 @@ let pokemonRepository = (function () {
     button.setAttribute("data-target", "#mymodal");
     newDiv.appendChild(button);
     pokemonDiv.appendChild(newDiv);
-    console.log({pokemonDiv});
+    addPokemonClickEvent(button, pokemon);
   }
 
   function filterPokemon(name) {
