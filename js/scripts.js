@@ -58,18 +58,34 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
+    
     let pokemonDiv = document.querySelector(".pokemon-list");
     let newDiv = document.createElement("div");
-    newDiv.classList.add("w-25");
-    newDiv.classList.add("mb-1");
+    newDiv.classList.add("card");
+    newDiv.classList.add("m-3");
+    newDiv.setAttribute("style", "width: 18rem");
+    let bodyDiv = document.createElement("div");
+    bodyDiv.classList.add("card-body");
+    let image = document.createElement("img");
+    image.classList.add("card-img-top");
+    image.setAttribute('src', "#");
+    newDiv.appendChild(image);
     let button = document.createElement("button");
     button.innerText = pokemon.name;
-    button.classList.add("group-list-item");
-    button.classList.add("text-center");
-    button.classList.add("list-group-item-action");
+    button.classList.add("btn");
+    button.classList.add("btn-primary");
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#mymodal");
-    newDiv.appendChild(button);
+    let header = document.createElement("h5");
+    header.classList.add("card-title");
+    header.innerText = pokemon.name;
+    let paragraph = document.createElement("p");
+    paragraph.classList.add("card-text");
+    paragraph.innerText = "placeholder text";
+    bodyDiv.appendChild(header);
+    bodyDiv.appendChild(paragraph);
+    bodyDiv.appendChild(button);
+    newDiv.appendChild(bodyDiv);
     pokemonDiv.appendChild(newDiv);
     addPokemonClickEvent(button, pokemon);
   }
@@ -103,6 +119,7 @@ let pokemonRepository = (function () {
       })
       .then(function (json) {
         json.results.forEach(function (item) {
+          console.log(item);
           let pokemon = {
             name: item.name,
             detailsUrl: item.url,
