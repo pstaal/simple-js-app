@@ -4,7 +4,6 @@ let pokemonRepository = (function (){
   let modalContainer = document.querySelector(".modal-dialog");
 
   function showDetails(pokemon) {
-    console.log(pokemon);
 
     // var pokemonItem = e.target.parentNode;
     loadDetails(pokemon).then(function () {
@@ -52,9 +51,10 @@ let pokemonRepository = (function (){
       modalContainer.appendChild(modal);
     });
   }
-}
 
-   function addPokemonClickEvent(button, pokemon) {
+
+   
+  function addPokemonClickEvent(button, pokemon) {
     button.addEventListener("click", () => showDetails(pokemon));
   }
 
@@ -138,6 +138,7 @@ let pokemonRepository = (function (){
       console.error(e);
     });
   });
+}
      
 
   function loadDetails(item) {
@@ -174,4 +175,4 @@ pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
-};
+});
