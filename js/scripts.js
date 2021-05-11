@@ -2,35 +2,31 @@ let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
   let modalContainer = document.querySelector(".modal-dialog");
-​
+
   function showDetails(pokemon) {
-​
-    //We nolonger need loaddetails() since all the pokemon details are coming from loadList(), please remove it.
+    // We nolonger need loaddetails() since all the pokemon details are coming from loadList(), please remove it.
     // loadDetails(pokemon).then(function () {
-​
     // Clear all existing modal content
     modalContainer.innerHTML = "";
-​
+    
     let modal = document.createElement("div");
     modal.classList.add("modal-content");
-​
-    //header
+  // header
     let modalHeader = document.createElement("div");
     modalHeader.classList.add("modal-header");
-    //title
+    // title
     let modalTitle = document.createElement("h3");
     modalTitle.classList.add("modal-title");
     modalTitle.innerText = pokemon.name;
-    //close button
+    // close button
     let headerButton = document.createElement("button");
     headerButton.classList.add("close");
     headerButton.setAttribute("data-dismiss", "modal");
     headerButton.setAttribute("aria-label", "close");
     headerButton.innerText = "X";
-​
     modalHeader.appendChild(modalTitle);
     modalHeader.appendChild(headerButton);
-​
+    
     //body
     let modalBody = document.createElement("div");
     modalBody.classList.add("modal-body");
@@ -38,31 +34,29 @@ let pokemonRepository = (function () {
     let pokemonImg = document.createElement("img");
     pokemonImg.classList.add("modal-img");
     pokemonImg.classList.add("w-100");
-​
+    
     // Add image url(animated) to modal content....you can change to pokemon.imageURL if you like
     pokemonImg.setAttribute("src", pokemon.imageURLanimated);
-​
+    
     //height
     let heightElement = document.createElement("p");
     heightElement.innerText = `Height: ${pokemon.height}`;
-​
+    
     modalBody.appendChild(pokemonImg);
     modalBody.appendChild(heightElement);
-​
+    
     modal.appendChild(modalHeader);
     modal.appendChild(modalBody);
-​
+    
     modalContainer.appendChild(modal);
   }
-​
-​
-​
+  
   function addPokemonClickEvent(button, pokemon) {
     button.addEventListener("click", () => showDetails(pokemon));
   }
-​
+  
   function addListItem(pokemon) {
-​
+    
     let pokemonDiv = document.querySelector(".pokemon-list");
     let newDiv = document.createElement("div");
     newDiv.classList.add("card");
@@ -74,7 +68,7 @@ let pokemonRepository = (function () {
     image.classList.add("card-img-top");
     image.setAttribute('src', "#");
     newDiv.appendChild(image);
-​
+    
     // Add image url to content
     image.src = pokemon.imageURL;
     let button = document.createElement("button");
@@ -96,17 +90,14 @@ let pokemonRepository = (function () {
     pokemonDiv.appendChild(newDiv);
     addPokemonClickEvent(button, pokemon);
   }
-​
+  
   function filterPokemon(name) {
     return pokemonList.filter((pokemon) => pokemon.name === name);
   }
-​
-​
+  
   function add(pokemon) {
     if (
-        typeof pokemon === "object" &&
-        "name" in pokemon &&
-        "detailsUrl" in pokemon
+        typeof pokemon === "object"
         ) {
     
     pokemonList.push(pokemon);
@@ -116,17 +107,17 @@ let pokemonRepository = (function () {
         );
      }
   }
-​
+  
   function getAll() {
     return pokemonList;
   }
-​
+
   /*
 Refactored the loadList() to use promise.all to ensure that all the promises are fulfilled
 before loading and diplaying the pokemon details.
 */
-​
-  function loadList() {
+
+function loadList() {
     return fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => Promise.all(data.results.map((item) => fetch(item.url)
@@ -146,12 +137,12 @@ before loading and diplaying the pokemon details.
           console.error(e);
         });
   }
-​
+  
   /*
   You don't need the loadDetails() anymore since we are fetching 
   all the pokemon details from the loadList()...please re move this
   */
-​
+ 
   // function loadDetails(item) {
   //   let url = item.detailsUrl;
   //   return fetch(url)
@@ -168,7 +159,7 @@ before loading and diplaying the pokemon details.
   //       console.error(e);
   //     });
   // }
-​
+  
   return {
     add: add,
     getAll: getAll,
@@ -176,9 +167,9 @@ before loading and diplaying the pokemon details.
     addListItem: addListItem,
     loadList: loadList,
   };
-​
+
 })();
-​
+
 pokemonRepository.loadList().then(function () {
   // Now the data is loaded!
   pokemonRepository.getAll().forEach(function (pokemon) {
